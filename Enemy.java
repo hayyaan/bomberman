@@ -4,7 +4,7 @@
  * if the player touches them then player will die. When the die by the fire/explosion
  * they will also give a powerup but on random basis.
  */
-package bomborman;
+//package bomborman;
 
 import java.awt.Image;
 import bomborman.Types.Move;

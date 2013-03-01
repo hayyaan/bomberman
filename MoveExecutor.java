@@ -6,7 +6,7 @@
  * don't forget dividing your code into classes and methods is good standard
  * practice in professional world.
  */
-package bomborman;
+//package bomborman;
 
 
 import bomborman.Types.*;

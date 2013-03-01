@@ -3,7 +3,7 @@
  * approperiate methods.
  * 
  */
-package bomborman;
+//package bomborman;
 
 import java.awt.Image;
 import bomborman.Types.*;

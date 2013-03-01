@@ -2,7 +2,7 @@
  * This is for unbreakable block of the map. This kind of block cannot be broken 
  * by any kind of explosion. 
  */
-package bomborman;
+//package bomborman;
 
 import java.awt.Image;
 

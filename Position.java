@@ -1,7 +1,7 @@
 /*
  * This class assist in handling with the positions of diffrent objects. 
  */
-package bomborman;
+//package bomborman;
 
 
 

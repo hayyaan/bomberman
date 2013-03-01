@@ -7,7 +7,7 @@
  * You can make constructor of this class if you feel need for it.
  * 
  */
-package bomborman;
+//package bomborman;
 
 
 import bomborman.Types.*;

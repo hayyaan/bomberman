@@ -7,10 +7,10 @@
  * 
  * If you want you can make three diffrent classes for each of the powerup.
  */
-package bomborman;
+//package bomborman;
 
 import java.awt.Image;
-import bomborman.Types.*;
+//import bomborman.Types.*;
 
 
 
@@ -18,7 +18,7 @@ import bomborman.Types.*;
 
 public class PowerUp extends MapBasicBlock{
     
-    private PowerUps powerUp;
+    private PowerUp powerUp;
     
     public PowerUp( BlockType _blockType, Position _position, Image _image, PowerUps _powerUp){
         

@@ -3,7 +3,7 @@
  * You can also difine some other types if you feel a need for it just create a public enumeration in
  * the calss "Types" and import "bomborman.Types.BlockType" where do you want to use these types.
  */
-package bomborman;
+//package bomborman;
 
 
 public class Types {

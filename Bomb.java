@@ -9,7 +9,7 @@
  *    have a system to identify that who installed this bomb but for this part 
  *    you may leave this implemntation 
  */
-package bomborman;
+//package bomborman;
 
 import java.awt.Image;
 

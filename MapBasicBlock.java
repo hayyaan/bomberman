@@ -4,7 +4,7 @@
  * So every object that we have to put on the map must extend this class.
  
  */
-package bomborman;
+//package bomborman;
 /*
  * importing the the enumeration "BlockType" from the class Types 
  * that is defined in the packege bomborman

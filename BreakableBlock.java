@@ -3,7 +3,7 @@
  * explosion of bomb and it may contain the powerup that can be used once 
  * it's exploded. 
  */
-package bomborman;
+//package bomborman;
 
 import java.awt.Image;
 

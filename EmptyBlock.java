@@ -2,7 +2,7 @@
  * This is for empty block of the map i-e the paths on the map will actually be
  * empty blocks.
  */
-package bomborman;
+//package bomborman;
 
 import java.awt.Image;
 
