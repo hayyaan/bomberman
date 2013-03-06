@@ -9,15 +9,38 @@
 //package bomborman;
 
 
-import bomborman.Types.*;
+//import bomborman.Types.*;
 
 
 public class MoveExecutor{
     
+	static int movement = 4;
     
-    public void executeMove( Player player, Move move){
-        
+    static public void executeMove( Player player, Types.Move move){
+    	Position newPos = null;
+    	if (move == Types.Move.UP){
+    		newPos = new Position(player.getPosition().getRow(),player.getPosition().getColumn()-movement);
+    	}
+    	else if(move == Types.Move.DOWN){
+    		newPos = new Position(player.getPosition().getRow(),player.getPosition().getColumn()+movement);
+    	}
+    	else if(move == Types.Move.LEFT){
+    		newPos = new Position(player.getPosition().getRow()-movement,player.getPosition().getColumn());
+    	}
+    	else if(move == Types.Move.RIGHT){
+    		newPos = new Position(player.getPosition().getRow()+movement,player.getPosition().getColumn());
+    	}
+    	else if(move == Types.Move.PLACE_BOMB){
+    		int playerR=(int) Math.floor(player.getPosition().getRow() / 50);
+        	int playerC=(int) Math.floor(player.getPosition().getColumn() / 50);
+    	}
+    	
+    	if (newPos!=null)
+    		player.setPosition(newPos);
+    	
+//		BomborMan.game.repaint();
+    	RandomTest.m.repaint();
+
     }
-    
     
 }

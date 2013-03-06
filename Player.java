@@ -6,7 +6,7 @@
 //package bomborman;
 
 import java.awt.Image;
-import bomborman.Types.*;
+//import bomborman.Types.*;
 
 
 public class Player extends MapBasicBlock {
@@ -14,9 +14,8 @@ public class Player extends MapBasicBlock {
     private boolean alive;
     private int playerID;
     
-    public Player(Types.BlockType _blockType, Position _position, Image _image){
-        
-        super( _blockType,_position, _image);
+    public Player(){    	
+        super(Types.BlockType.PLAYER,new Position(50,50),loadImage("resources/b1.gif"));
         alive = true;
         playerID++;
     }

@@ -7,11 +7,12 @@
 import javax.swing.*;
 import java.awt.event.*;
 import java.awt.Dimension;
+import java.util.Scanner;
 
 public class BomborMan {
 	static JFrame mainFrame;
 	static JPanel mainMenu;
-	MapGui game;
+	static MapGui game;
 	JPanel help; //need to make a class of this
 
 	BomborMan(){
@@ -46,6 +47,7 @@ public class BomborMan {
 //				game.switchMenu();
 				mainFrame.remove(mainMenu);
 				mainFrame.add(game);
+				mainFrame.addKeyListener(game);
 				mainFrame.setSize(765,795);
 				mainFrame.setLocationRelativeTo(null);
 				mainFrame.setVisible(true);
@@ -59,36 +61,36 @@ public class BomborMan {
 		mainFrame.setLocationRelativeTo(null);
 		mainFrame.setVisible(true);
 	}
-
-	public void initGame(){
-		
-	}
+	
+	static void setLookAndFeel(){
+		try{
+	    	UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+	    	} catch (UnsupportedLookAndFeelException e) {
+	    	       // handle exception
+	        }
+	        catch (ClassNotFoundException e) {
+	           // handle exception
+	        }
+	        catch (InstantiationException e) {
+	           // handle exception
+	        }
+	        catch (IllegalAccessException e) {
+	           // handle exception
+	        }
+	} 
 
     
     public static void main(String[] args) {
         // gmae should run here
-    	try{
-    	UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
-    	} catch (UnsupportedLookAndFeelException e) {
-    	       // handle exception
-        }
-        catch (ClassNotFoundException e) {
-           // handle exception
-        }
-        catch (InstantiationException e) {
-           // handle exception
-        }
-        catch (IllegalAccessException e) {
-           // handle exception
-        }
+    	
+    	setLookAndFeel();
     	
         BomborMan run = new BomborMan();
         
         run.initMainMenu();
         
-        
-        
-        System.out.println("hi");
+        Scanner input = new Scanner(System.in);
+        input.nextInt();
         
     }
 }
