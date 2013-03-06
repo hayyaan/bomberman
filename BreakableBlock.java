@@ -11,9 +11,9 @@ import java.awt.Image;
 
 public class BreakableBlock extends MapBasicBlock {
     
-    public BreakableBlock(Types.BlockType _blockType, Position _position, Image _image){
+    public BreakableBlock(Position _position, Image _image){
         
-        super( _blockType,_position, _image);
+        super( Types.BlockType.BREAKABLE,_position, _image);
     }
     
 }

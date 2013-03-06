@@ -18,6 +18,7 @@ public class Player extends MapBasicBlock {
         
         super( _blockType,_position, _image);
         alive = true;
+        playerID++;
     }
     
 }

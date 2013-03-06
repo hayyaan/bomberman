@@ -9,24 +9,37 @@
  * importing the the enumeration "BlockType" from the class Types 
  * that is defined in the packege bomborman
  */
-import bomborman.Types.BlockType;  
-import java.awt.Image;
+//import bomborman.Types.BlockType;  
+//import Types;
+import java.awt.*;
+import java.awt.image.*;
+import javax.imageio.ImageIO;
+import java.io.*;
 
 
 
 
 public class MapBasicBlock {
     
-    private BlockType blockType;
+    private Types.BlockType blockType;
     private Position position;
     private Image image;
+    private Graphics2D graphics2d;
     
     
-    public MapBasicBlock( BlockType _blockType, Position _position, Image _image){
+    public MapBasicBlock( Types.BlockType _blockType, Position _position, Image _image){
     
         blockType = _blockType;
         position = _position;
         image = _image;
+        graphics2d = ((BufferedImage) image).createGraphics();
+    }
+    
+    public Graphics2D getGraphics(){
+    	return graphics2d;
+    }
+    public Image getImage(){
+    	return image;
     }
     
     
@@ -34,7 +47,7 @@ public class MapBasicBlock {
     /*
      * This function return the type of the Block on the map.
      */
-    public BlockType getBlockType(){
+    public Types.BlockType getBlockType(){
         return blockType;
     }
     
@@ -47,7 +60,19 @@ public class MapBasicBlock {
         position = newPosition;
     }
     
-    public boolean isofType( BlockType _blockType ){
+    static public Image loadImage(String location){
+    	Image img = null;
+    	try{
+    		img = ImageIO.read(new File(location));
+    		
+    	} catch(IOException e){
+    		System.out.println("Image at "+location+" cannot be loaded");
+    	}
+    	return img;
+    	
+    }
+    
+    public boolean isofType( Types.BlockType _blockType ){
         
         if( blockType == _blockType ){
             return true;

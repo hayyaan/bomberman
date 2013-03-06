@@ -6,13 +6,15 @@
 
 import java.awt.Image;
 
+//import Types.BlockType;
+
 
 
 
 public class UnbreakableBlock extends MapBasicBlock {
     
-    public UnbreakableBlock(Types.BlockType _blockType, Position _position, Image _image){
+    public UnbreakableBlock(Position _position, Image _image){
         
-        super( _blockType,_position, _image);
+        super( Types.BlockType.BREAKABLE ,_position, _image);
     }
 }

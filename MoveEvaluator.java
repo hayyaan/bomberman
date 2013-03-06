@@ -10,7 +10,7 @@
 //package bomborman;
 
 
-import bomborman.Types.*;
+//import bomborman.Types.*;
 
 
 public class MoveEvaluator {

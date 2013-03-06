@@ -9,14 +9,15 @@ import java.awt.event.*;
 import java.awt.Dimension;
 
 public class BomborMan {
-	JFrame mainFrame;
-	JPanel mainMenu;
+	static JFrame mainFrame;
+	static JPanel mainMenu;
 	MapGui game;
 	JPanel help; //need to make a class of this
 
 	BomborMan(){
 		mainFrame = new JFrame("Bomborman version 1.0");
 		mainMenu = new JPanel();
+		game = new MapGui();
 	}
 
 	void initMainMenu(){
@@ -40,6 +41,16 @@ public class BomborMan {
 			}
 		});
 		
+		play.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent event){
+//				game.switchMenu();
+				mainFrame.remove(mainMenu);
+				mainFrame.add(game);
+				mainFrame.setSize(765,795);
+				mainFrame.setLocationRelativeTo(null);
+				mainFrame.setVisible(true);
+			}
+		});
 
 		mainFrame.add(mainMenu);
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -49,6 +60,9 @@ public class BomborMan {
 		mainFrame.setVisible(true);
 	}
 
+	public void initGame(){
+		
+	}
 
     
     public static void main(String[] args) {
@@ -67,9 +81,14 @@ public class BomborMan {
         catch (IllegalAccessException e) {
            // handle exception
         }
+    	
         BomborMan run = new BomborMan();
         
         run.initMainMenu();
+        
+        
+        
+        System.out.println("hi");
         
     }
 }
