@@ -19,9 +19,8 @@ import java.awt.Image;
 
 public class Bomb extends MapBasicBlock {
     
-    public Bomb(Types.BlockType _blockType, Position _position, Image _image){
-        
-        super( _blockType,_position, _image);
+    public Bomb(Position _position){
+        super(Types.BlockType.BOMB,_position, loadImage("resources/bomb.gif"));
     }
     
 }

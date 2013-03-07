@@ -15,7 +15,7 @@ public class Player extends MapBasicBlock {
     private int playerID;
     
     public Player(){    	
-        super(Types.BlockType.PLAYER,new Position(50,50),loadImage("resources/b1.gif"));
+        super(Types.BlockType.PLAYER,new Position(75,75),loadImage("resources/b1.gif"));
         alive = true;
         playerID++;
     }

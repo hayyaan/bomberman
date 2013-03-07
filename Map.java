@@ -55,6 +55,7 @@ public class Map {
     		}
     	}
     	
+    	map[10][11] = new Bomb(new Position(10,11));
     }
     
     

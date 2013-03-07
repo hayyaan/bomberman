@@ -18,9 +18,10 @@ public class MapGui extends JPanel implements KeyListener,ActionListener{
 	Player p1;
 	MoveEvaluator moveEval;
 	MoveExecutor moveExec;
-	Timer time = new Timer(8,this);
+	Timer time = new Timer(15,this);
 	
 	int movement;
+	boolean bomb;
 	
 
 	public MapGui(){
@@ -51,6 +52,10 @@ public class MapGui extends JPanel implements KeyListener,ActionListener{
 	
 	
 	public void actionPerformed(ActionEvent e){
+		
+		System.out.println(bomb);
+		
+		
 		if (movement ==1){
 			MoveExecutor.executeMove(p1, Types.Move.UP);
 		}
@@ -63,19 +68,26 @@ public class MapGui extends JPanel implements KeyListener,ActionListener{
 		else if (movement ==-2){
 			MoveExecutor.executeMove(p1, Types.Move.LEFT);
 		}
+		else if (bomb == true){
+			System.out.println("Hello");
+			MoveExecutor.executeMove(p1, Types.Move.PLACE_BOMB);
+			bomb = false;
+		}
 		
 	}
 	
 	public void keyReleased(KeyEvent e){
 		movement =0;
+		bomb = false;
 	}
 	
 	public void keyTyped(KeyEvent e){
 		movement =0;
+//		bomb = false;
 	}
 	
 	public void keyPressed(KeyEvent e){
-		System.out.println(e.getKeyCode());
+//		System.out.println(e.getKeyCode());
 		
 		if (e.getKeyCode()==KeyEvent.VK_UP){
 			System.out.println("Pressed UP!");
@@ -104,6 +116,13 @@ public class MapGui extends JPanel implements KeyListener,ActionListener{
 				movement =2;
 			}
 		}
+		else if (e.getKeyCode()==KeyEvent.VK_SPACE){
+			System.out.println("Pressed SPACE!");
+//			if (MoveEvaluator.isValidMove(p1,Types.Move.PLACE_BOMB)){
+				bomb =true;
+//				System.out.println(bomb);
+//			}
+		}
 		
 	}
 	
@@ -127,7 +146,7 @@ public class MapGui extends JPanel implements KeyListener,ActionListener{
 			}
 		}
 		
-		g2d.drawImage(p1.getImage(),p1.getPosition().getRow(),p1.getPosition().getColumn(),p1.getImage().getWidth(null),p1.getImage().getHeight(null),null);
+		g2d.drawImage(p1.getImage(),p1.getPosition().getRow()-25,p1.getPosition().getColumn()-25,p1.getImage().getWidth(null),p1.getImage().getHeight(null),null);
 		
 	}
 	

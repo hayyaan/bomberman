@@ -14,7 +14,7 @@
 
 public class MoveExecutor{
     
-	static int movement = 4;
+	static int movement = 5;
     
     static public void executeMove( Player player, Types.Move move){
     	Position newPos = null;
@@ -33,6 +33,9 @@ public class MoveExecutor{
     	else if(move == Types.Move.PLACE_BOMB){
     		int playerR=(int) Math.floor(player.getPosition().getRow() / 50);
         	int playerC=(int) Math.floor(player.getPosition().getColumn() / 50);
+        	newPos = new Position(5,3);
+        		RandomTest.m.map.map[5][3] = new Bomb(newPos);
+        		System.out.println("BOMB Planted!");
     	}
     	
     	if (newPos!=null)
