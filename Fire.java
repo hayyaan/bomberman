@@ -4,15 +4,12 @@
  */
 //package bomborman;
 
-import java.awt.Image;
-
-
-
 
 public class Fire extends MapBasicBlock{
     
-    public Fire(Types.BlockType _blockType, Position _position, Image _image){
+	
+    public Fire(Position _position){
         
-        super( _blockType,_position, _image);
+        super( Types.BlockType.FIRE,_position, MapBasicBlock.loadImage("resources/fire1.gif"));
     }
 }

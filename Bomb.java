@@ -11,16 +11,20 @@
  */
 //package bomborman;
 
-import java.awt.Image;
 
 
 
 
 
 public class Bomb extends MapBasicBlock {
+	
+	Sprite sprites;
     
     public Bomb(Position _position){
-        super(Types.BlockType.BOMB,_position, loadImage("resources/bomb.gif"));
+        super(Types.BlockType.BOMB,_position, loadImage("resources/bomb1.gif"));
+        
+        String spr[] = {"resources/bomb1.gif","resources/bomb2.gif","resources/bomb3.gif"};
+        sprites = new Sprite(spr);
     }
     
 }

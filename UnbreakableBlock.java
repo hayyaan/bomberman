@@ -15,6 +15,6 @@ public class UnbreakableBlock extends MapBasicBlock {
     
     public UnbreakableBlock(Position _position, Image _image){
         
-        super( Types.BlockType.BREAKABLE ,_position, _image);
+        super( Types.BlockType.UNBREKABLE ,_position, _image);
     }
 }

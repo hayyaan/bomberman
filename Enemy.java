@@ -6,17 +6,102 @@
  */
 //package bomborman;
 
-import java.awt.Image;
-import bomborman.Types.Move;
+//import bomborman.Types.Move;
 
 
 
 
 public class Enemy extends MapBasicBlock{
+	
+	int direction;
     
-    public Enemy(Types.BlockType _blockType, Position _position, Image _image){
+    public Enemy(Position _position){
         
-        super( _blockType,_position, _image);
+        super(Types.BlockType.ENEMY,_position,loadImage("resources/e1.gif"));
+        direction =-1;
+    }
+    
+    public void moveEnemy(){
+    	int step = 1;
+    	if (direction ==1){ //up
+    		if (MoveEvaluator.isValidMove(this, Types.Move.UP)==true){
+    			MoveExecutor.executeMove(this, Types.Move.UP,step);
+    		}
+    		else {
+    			if (MoveEvaluator.isValidMove(this, Types.Move.RIGHT)==true){
+    				direction=2;
+    			}
+    			else if (MoveEvaluator.isValidMove(this, Types.Move.LEFT)==true){
+    				direction=-2;
+    			}
+    			else {
+    				direction =-1;
+    			}
+    		}
+    	}
+    	else if (direction ==-1){ //down
+    		if (MoveEvaluator.isValidMove(this, Types.Move.DOWN)==true){
+    			MoveExecutor.executeMove(this, Types.Move.DOWN,step);
+    		}
+    		else {
+    			if (MoveEvaluator.isValidMove(this, Types.Move.LEFT)==true){
+    				direction=-2;
+    			}
+    			else if (MoveEvaluator.isValidMove(this, Types.Move.RIGHT)==true){
+    				direction=2;
+    			}
+    			else {
+    				direction =1;
+    			}
+    		}
+    	}
+    	else if (direction ==2){ //right
+    		if (MoveEvaluator.isValidMove(this, Types.Move.RIGHT)==true){
+    			MoveExecutor.executeMove(this, Types.Move.RIGHT,step);
+    		}
+    		else {
+    			if (MoveEvaluator.isValidMove(this, Types.Move.UP)==true){
+    				direction=1;
+    			}
+    			else if (MoveEvaluator.isValidMove(this, Types.Move.DOWN)==true){
+    				direction=-1;
+    			}
+    			else {
+    				direction =-2;
+    			}
+    		}
+    	}
+    	if (direction ==-2){
+    		if (MoveEvaluator.isValidMove(this, Types.Move.LEFT)==true){
+    			MoveExecutor.executeMove(this, Types.Move.LEFT,step);
+    		}
+    		else {
+    			if (MoveEvaluator.isValidMove(this, Types.Move.DOWN)==true){
+    				direction=-1;
+    			}
+    			else if (MoveEvaluator.isValidMove(this, Types.Move.UP)==true){
+    				direction=1;
+    			}
+    			else {
+    				direction =2;
+    			}
+    		}
+    	}
+    }
+    
+    public void killPlayer(){
+    		
+    		int playerR = (RandomTest.m.p1.getPosition().getRow());
+        	int playerC = (RandomTest.m.p1.getPosition().getColumn());
+    		
+    		int eR = this.getPosition().getRow();
+    		int eC = this.getPosition().getColumn();
+    		
+    		
+    		if ( Math.abs((playerR -eR))<=50 && Math.abs((playerC -eC))<=50 ){
+    			System.out.println("Enemy killed you!");
+    			RandomTest.m.gameOver=true;
+    		}
     }
     
 }

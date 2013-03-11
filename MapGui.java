@@ -16,19 +16,35 @@ public class MapGui extends JPanel implements KeyListener,ActionListener{
 	Map map;
 	Image bg;
 	Player p1;
+	Enemy e1;
 	MoveEvaluator moveEval;
 	MoveExecutor moveExec;
-	Timer time = new Timer(15,this);
+	Timer time = new Timer(8,this);
 	
 	int movement;
-	boolean bomb;
+	int playerStep = 5;
+	
+	Bomb bomb;
+	boolean bombToggle;
+	int bombTimer;
+	
+	boolean fire;
+	int fireTimer;
+	
+	boolean gameEnd;
+	boolean gameOver;
 	
 
 	public MapGui(){
 		bg = MapBasicBlock.loadImage("resources/background.png");
 		map = new Map(15,15);
 		p1 = new Player();
+		
 		time.start();
+		
+		e1 = new Enemy(new Position((7*50)+25,(7*50)+25));
+		
+		bomb=null;
 		
 		this.addKeyListener(this);
 		this.setFocusable(true);
@@ -36,49 +52,84 @@ public class MapGui extends JPanel implements KeyListener,ActionListener{
 		this.setFocusTraversalKeysEnabled(true);	
 	}
 	
-	static void switchMenu(){
-		//BomborMan.mainFrame.remove(BomborMan.mainMenu);
-		
-		JFrame frame = new JFrame();
-		
-		frame.add(panel);
-		frame.setSize(500,500);
-		frame.setVisible(true);
-		
-//		BomborMan.mainFrame.add(panel);
-//		BomborMan.mainFrame.setSize(500,500);
-//		BomborMan.mainFrame.setVisible(true);
-	}
-	
-	
 	public void actionPerformed(ActionEvent e){
 		
-		System.out.println(bomb);
+//		System.out.println(bomb);
 		
 		
 		if (movement ==1){
-			MoveExecutor.executeMove(p1, Types.Move.UP);
+			MoveExecutor.executeMove(p1, Types.Move.UP,playerStep);
 		}
 		else if (movement==-1){
-			MoveExecutor.executeMove(p1, Types.Move.DOWN);
+			MoveExecutor.executeMove(p1, Types.Move.DOWN,playerStep);
 		}
 		else if (movement ==2){
-			MoveExecutor.executeMove(p1, Types.Move.RIGHT);
+			MoveExecutor.executeMove(p1, Types.Move.RIGHT,playerStep);
 		}
 		else if (movement ==-2){
-			MoveExecutor.executeMove(p1, Types.Move.LEFT);
+			MoveExecutor.executeMove(p1, Types.Move.LEFT,playerStep);
 		}
-		else if (bomb == true){
-			System.out.println("Hello");
-			MoveExecutor.executeMove(p1, Types.Move.PLACE_BOMB);
-			bomb = false;
+		RandomTest.m.p1.sprites.animatePlayer(movement);
+		
+		
+		if (e1 !=null){
+			e1.moveEnemy();
+//			e1.killPlayer();
 		}
+		
+		
+		if (bombToggle == true){
+//			System.out.println("Hello");
+			MoveExecutor.executeMove(p1, Types.Move.PLACE_BOMB,playerStep);
+			bombTimer = 300;
+			bombToggle = false;
+		}
+		
+		if (bombTimer==1){
+			//explosion
+			MoveExecutor.explodeBomb(bomb);
+			System.out.println("Explosion");
+			bombTimer--;
+			fireTimer = 20;
+		}
+		
+		else if (bombTimer>0){
+			bombTimer--;
+			bomb.sprites.animateBomb();
+		}
+		
+		
+		if (fire ==true){
+			fireTimer--;
+		}
+		
+		if (fireTimer <0){
+			fire=false;
+		}
+		
+		if (map.checkEnd()){ //if all boxes cleared
+			gameEnd = true;
+			System.out.println("Game Over!\n You won!");
+		}
+		
+		if (gameOver==true){ //if player dies
+			System.out.println("You died!");
+			time.stop();
+//			e1 = null;
+		}
+		
+		
+		
+		
+		
+		
+		movement=0;
 		
 	}
 	
 	public void keyReleased(KeyEvent e){
 		movement =0;
-		bomb = false;
+//		bomb = false;
 	}
 	
 	public void keyTyped(KeyEvent e){
@@ -118,11 +169,29 @@ public class MapGui extends JPanel implements KeyListener,ActionListener{
 		}
 		else if (e.getKeyCode()==KeyEvent.VK_SPACE){
 			System.out.println("Pressed SPACE!");
-//			if (MoveEvaluator.isValidMove(p1,Types.Move.PLACE_BOMB)){
-				bomb =true;
+//			System.out.println(bombToggle);
+			if (MoveEvaluator.isValidMove(p1,Types.Move.PLACE_BOMB)){
+//				System.out.println("Icant");
+				bombToggle =true;
 //				System.out.println(bomb);
-//			}
+			}
 		}
+		
+//		if (movement ==1){
+//			MoveExecutor.executeMove(p1, Types.Move.UP);
+//		}
+//		else if (movement==-1){
+//			MoveExecutor.executeMove(p1, Types.Move.DOWN);
+//		}
+//		else if (movement ==2){
+////			System.out.println(e1.isofType(Types.BlockType.ENEMY));
+////			MoveExecutor.executeMove(e1, Types.Move.RIGHT);
+//			MoveExecutor.executeMove(p1, Types.Move.RIGHT);
+//			
+//		}
+//		else if (movement ==-2){
+//			MoveExecutor.executeMove(p1, Types.Move.LEFT);
+//		}
 		
 	}
 	
@@ -146,8 +215,17 @@ public class MapGui extends JPanel implements KeyListener,ActionListener{
 			}
 		}
 		
+//		if (bomb !=null){
+//			g2d.drawImage(bomb.getImage(),bomb.getPosition().getRow()-25,bomb.getPosition().getColumn()-25,bomb.getImage().getWidth(null),bomb.getImage().getHeight(null),null);
+//			}
+		
 		g2d.drawImage(p1.getImage(),p1.getPosition().getRow()-25,p1.getPosition().getColumn()-25,p1.getImage().getWidth(null),p1.getImage().getHeight(null),null);
 		
+
+		
+		if (e1 !=null){
+		g2d.drawImage(e1.getImage(),e1.getPosition().getRow()-25,e1.getPosition().getColumn()-25,e1.getImage().getWidth(null),e1.getImage().getHeight(null),null);
+		}
 	}
 	
 	

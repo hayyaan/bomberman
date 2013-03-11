@@ -17,7 +17,7 @@ public class RandomTest {
 	f.setVisible(true);
 	
 	
-	System.out.println("column: "+m.p1.getPosition().getColumn());
+//	System.out.println("column: "+m.p1.getPosition().getColumn());
 	
 	
 	

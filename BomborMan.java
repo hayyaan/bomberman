@@ -12,13 +12,13 @@ import java.util.Scanner;
 public class BomborMan {
 	static JFrame mainFrame;
 	static JPanel mainMenu;
-	static MapGui game;
+//	static MapGui game;
 	JPanel help; //need to make a class of this
 
 	BomborMan(){
 		mainFrame = new JFrame("Bomborman version 1.0");
 		mainMenu = new JPanel();
-		game = new MapGui();
+//		game = new MapGui();
 	}
 
 	void initMainMenu(){
@@ -45,12 +45,14 @@ public class BomborMan {
 		play.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent event){
 //				game.switchMenu();
-				mainFrame.remove(mainMenu);
-				mainFrame.add(game);
-				mainFrame.addKeyListener(game);
-				mainFrame.setSize(765,795);
-				mainFrame.setLocationRelativeTo(null);
-				mainFrame.setVisible(true);
+//				mainFrame.remove(mainMenu);
+//				mainFrame.add(game);
+//				mainFrame.addKeyListener(game);
+//				mainFrame.setSize(765,795);
+//				mainFrame.setLocationRelativeTo(null);
+//				mainFrame.setVisible(true);
+				mainFrame.removeAll();
+				RandomTest.main(null);
 			}
 		});
 
@@ -89,8 +91,8 @@ public class BomborMan {
         
         run.initMainMenu();
         
-        Scanner input = new Scanner(System.in);
-        input.nextInt();
+//        Scanner input = new Scanner(System.in);
+//        input.nextInt();
         
     }
 }

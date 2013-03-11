@@ -22,7 +22,7 @@ import java.io.*;
 public class MapBasicBlock {
     
     private Types.BlockType blockType;
-    private Position position;
+    public Position position;
     private Image image;
     private Graphics2D graphics2d;
     
@@ -40,6 +40,10 @@ public class MapBasicBlock {
     }
     public Image getImage(){
     	return image;
+    }
+    
+    public void setImage (Image i){
+    	image =i;
     }
     
     
