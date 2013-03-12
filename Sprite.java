@@ -1,10 +1,10 @@
 
 import java.awt.Image;
 
-public class Sprite {
+public class Sprite { //handles sprites and all animations
 
-	Image sprites[];
-	int alternate;
+	Image sprites[]; // array of the images
+	int alternate; //keeps track of image in use
 	
 	Sprite(String[] args){
 		sprites = new Image[args.length];
@@ -15,18 +15,7 @@ public class Sprite {
 	}
 	
 	public void animatePlayer(int movement){
-//		if (movement==0){ //static
-//			if (alternate==0){
-//				RandomTest.m.p1.setImage(sprites[0]);
-//				alternate = 1;
-//				return;
-//			}
-//			else {
-//				RandomTest.m.p1.setImage(sprites[1]);
-//				alternate = 0;
-//				return;
-//			}	
-//		}
+
 		if (movement==1){ //up
 			if (alternate==0){
 				RandomTest.m.p1.setImage(sprites[2]);
@@ -130,6 +119,34 @@ public class Sprite {
 				return;
 			}	
 		}
+		else if (movement==9){ // dead
+//			try {
+			RandomTest.m.p1.setImage(sprites[21]);
+			RandomTest.m.repaint();
+			
+//			Thread.sleep(100);
+			
+			RandomTest.m.p1.setImage(sprites[22]);
+			RandomTest.m.repaint();
+			
+//			Thread.sleep(100);
+			
+			RandomTest.m.p1.setImage(sprites[23]);
+			RandomTest.m.repaint();
+			
+//			Thread.sleep(100);
+			
+			RandomTest.m.p1.setImage(sprites[22]);
+			RandomTest.m.repaint();
+			
+//			Thread.sleep(100);
+			
+//			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+			
+		}
 
 	}
 	
@@ -154,5 +171,18 @@ public class Sprite {
 			return;
 		}
 		
+	}
+	
+	static public void animateFire(int step){
+		for (int r=0;r<15;r++){
+    		for (int c=0;c<15;c++){
+    			if( RandomTest.m.map.map[r][c] == null){
+    				continue;
+    			}
+    			else if ( RandomTest.m.map.map[r][c].isofType(Types.BlockType.FIRE)){
+    				RandomTest.m.map.map[r][c].setImage(((Fire) RandomTest.m.map.map[r][c]).sprites.sprites[step]);
+    			}
+    		}
+    	}
 	}
 }

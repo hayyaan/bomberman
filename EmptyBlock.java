@@ -6,7 +6,7 @@
 
 import java.awt.Image;
 
-
+//not used
 
 
 public class EmptyBlock extends MapBasicBlock {

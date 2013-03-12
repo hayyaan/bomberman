@@ -36,7 +36,7 @@ public class BomborMan {
 		mainMenu.add(Box.createRigidArea(new Dimension(0,10)));
 		mainMenu.add(exit);
 		
-		exit.addActionListener(new ActionListener(){
+		exit.addActionListener(new ActionListener(){ //exit button pressed
 			public void actionPerformed(ActionEvent event){
 				System.exit(1);
 			}

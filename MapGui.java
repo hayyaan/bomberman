@@ -4,35 +4,37 @@
 //package bomborman;
 
 import javax.swing.*;
-import java.awt.image.*;
-import java.io.*;
 import java.awt.*;
 import java.awt.event.*;
 
-import javax.imageio.*;
-
 public class MapGui extends JPanel implements KeyListener,ActionListener{
 	static JPanel panel;
-	Map map;
-	Image bg;
-	Player p1;
-	Enemy e1;
-	MoveEvaluator moveEval;
-	MoveExecutor moveExec;
-	Timer time = new Timer(8,this);
 	
-	int movement;
-	int playerStep = 5;
+	Map map; //map
+	Image bg; //background
+
+	Player p1; //player
 	
-	Bomb bomb;
-	boolean bombToggle;
-	int bombTimer;
+	Enemy e1; //enemy 1
+	Enemy e2; //enemy 2
 	
-	boolean fire;
-	int fireTimer;
+	MoveEvaluator moveEval; //class instantiation to run moveEvualtor function
+	MoveExecutor moveExec; //^^
+	Timer time = new Timer(8,this); //runs actionListener every 8ms
 	
-	boolean gameEnd;
-	boolean gameOver;
+	int movement; //movement tracked, based on keyboard input
+	int playerStep = 5; //increments in player's positions
+	
+	Bomb bomb; // bomb
+	boolean bombToggle; //toggle for placing bomb
+	int bombTimer; // bomb timer
+	
+	boolean fire; // fireToggle
+	int fireTimer; // fire timer
+	int fireCounter; // fire counter, used for sprites
+	
+	boolean gameEnd; // level cleared
+	boolean gameOver; // game over
 	
 
 	public MapGui(){
@@ -42,7 +44,8 @@ public class MapGui extends JPanel implements KeyListener,ActionListener{
 		
 		time.start();
 		
-		e1 = new Enemy(new Position((7*50)+25,(7*50)+25));
+		e1 = new Enemy(new Position((7*50)+25,(7*50)+25),2);
+		e2 = new Enemy(new Position((3*50)+25,(9*50)+25),1);
 		
 		bomb=null;
 		
@@ -69,12 +72,18 @@ public class MapGui extends JPanel implements KeyListener,ActionListener{
 		else if (movement ==-2){
 			MoveExecutor.executeMove(p1, Types.Move.LEFT,playerStep);
 		}
+		
 		RandomTest.m.p1.sprites.animatePlayer(movement);
+		
 		
 		
 		if (e1 !=null){
 			e1.moveEnemy();
-//			e1.killPlayer();
+			e1.killPlayer();
+		}
+		if (e2 !=null){
+			e2.moveEnemy();
+			e2.killPlayer();
 		}
 		
 		
@@ -91,34 +100,57 @@ public class MapGui extends JPanel implements KeyListener,ActionListener{
 			System.out.println("Explosion");
 			bombTimer--;
 			fireTimer = 20;
+			fireCounter=0;
+			fire = true;
 		}
 		
 		else if (bombTimer>0){
 			bombTimer--;
-			bomb.sprites.animateBomb();
+			if (bombTimer %8 ==0){
+				bomb.sprites.animateBomb();
+			}
 		}
 		
 		
 		if (fire ==true){
 			fireTimer--;
+			if (fireTimer % 8 ==0){
+				if (fireCounter<3){
+				Sprite.animateFire(fireCounter);
+				fireCounter++;
+				}
+			}
 		}
 		
 		if (fireTimer <0){
+//			System.out.println("running");
 			fire=false;
+			for (int r=0;r<15;r++){
+	    		for (int c=0;c<15;c++){
+	    			if( RandomTest.m.map.map[r][c] == null){
+	    				continue;
+	    			}
+	    			else if ( RandomTest.m.map.map[r][c].isofType(Types.BlockType.FIRE)){
+	    				RandomTest.m.map.map[r][c]=null;
+	    			}
+	    		}
+	    	}
+			
 		}
 		
 		if (map.checkEnd()){ //if all boxes cleared
 			gameEnd = true;
+			time.stop();
 			System.out.println("Game Over!\n You won!");
 		}
 		
 		if (gameOver==true){ //if player dies
 			System.out.println("You died!");
+			movement = 9;
+			RandomTest.m.p1.sprites.animatePlayer(movement);
 			time.stop();
 //			e1 = null;
 		}
-		
-		
 		
 		
 		
@@ -141,57 +173,36 @@ public class MapGui extends JPanel implements KeyListener,ActionListener{
 //		System.out.println(e.getKeyCode());
 		
 		if (e.getKeyCode()==KeyEvent.VK_UP){
-			System.out.println("Pressed UP!");
+//			System.out.println("Pressed UP!");
 			if (MoveEvaluator.isValidMove(p1,Types.Move.UP)){
-			movement = 1;
+				movement = 1;
 			}
-			
-//				MoveExecutor.executeMove(p1, Types.Move.UP);
-//			}
 		}
 		else if (e.getKeyCode()==KeyEvent.VK_DOWN){
-			System.out.println("Pressed DOWN!");
+//			System.out.println("Pressed DOWN!");
 			if (MoveEvaluator.isValidMove(p1,Types.Move.DOWN)){
 				movement = -1;
 			}
 		}
 		else if (e.getKeyCode()==KeyEvent.VK_LEFT){
-			System.out.println("Pressed LEFT!");
+//			System.out.println("Pressed LEFT!");
 			if (MoveEvaluator.isValidMove(p1,Types.Move.LEFT)){
 				movement = -2;
 			}
 		}
 		else if (e.getKeyCode()==KeyEvent.VK_RIGHT){
-			System.out.println("Pressed RIGHT!");
+//			System.out.println("Pressed RIGHT!");
 			if (MoveEvaluator.isValidMove(p1,Types.Move.RIGHT)){
 				movement =2;
 			}
 		}
 		else if (e.getKeyCode()==KeyEvent.VK_SPACE){
-			System.out.println("Pressed SPACE!");
-//			System.out.println(bombToggle);
-			if (MoveEvaluator.isValidMove(p1,Types.Move.PLACE_BOMB)){
-//				System.out.println("Icant");
+//			System.out.println("Pressed SPACE!");
+			if (MoveEvaluator.isValidMove(p1,Types.Move.PLACE_BOMB)){			
 				bombToggle =true;
 //				System.out.println(bomb);
 			}
 		}
-		
-//		if (movement ==1){
-//			MoveExecutor.executeMove(p1, Types.Move.UP);
-//		}
-//		else if (movement==-1){
-//			MoveExecutor.executeMove(p1, Types.Move.DOWN);
-//		}
-//		else if (movement ==2){
-////			System.out.println(e1.isofType(Types.BlockType.ENEMY));
-////			MoveExecutor.executeMove(e1, Types.Move.RIGHT);
-//			MoveExecutor.executeMove(p1, Types.Move.RIGHT);
-//			
-//		}
-//		else if (movement ==-2){
-//			MoveExecutor.executeMove(p1, Types.Move.LEFT);
-//		}
 		
 	}
 	
@@ -204,7 +215,7 @@ public class MapGui extends JPanel implements KeyListener,ActionListener{
 		g2d.drawImage(bg,0,0,bg.getWidth(null),bg.getHeight(null),null);
 		
 		
-		for (int r=0;r<map.getRows();r++){
+		for (int r=0;r<map.getRows();r++){ //draw where needed
 			for (int c=0;c<map.getCols();c++){
 				if (map.map[r][c]==null){
 					continue;
@@ -224,7 +235,10 @@ public class MapGui extends JPanel implements KeyListener,ActionListener{
 
 		
 		if (e1 !=null){
-		g2d.drawImage(e1.getImage(),e1.getPosition().getRow()-25,e1.getPosition().getColumn()-25,e1.getImage().getWidth(null),e1.getImage().getHeight(null),null);
+			g2d.drawImage(e1.getImage(),e1.getPosition().getRow()-25,e1.getPosition().getColumn()-25,e1.getImage().getWidth(null),e1.getImage().getHeight(null),null);
+		}
+		if (e2 !=null){
+			g2d.drawImage(e2.getImage(),e2.getPosition().getRow()-25,e2.getPosition().getColumn()-25,e2.getImage().getWidth(null),e1.getImage().getHeight(null),null);
 		}
 	}
 	

@@ -34,11 +34,10 @@ public class Map {
     	return map;
     }
     
-    public void MapGeneration(){
+    public void MapGeneration(){ // generated the blocks
     	Image uBlock = MapBasicBlock.loadImage("resources/unbreakBlock.png");
     	Image bBlock = MapBasicBlock.loadImage("resources/breakBlock.png");
     	
-    	System.out.println("Generated!");
     	
     	for (int r=0;r<rows;r++){
     		for (int c=0;c<cols;c++){
@@ -60,7 +59,7 @@ public class Map {
     	
     }
     
-    public boolean checkEnd(){
+    public boolean checkEnd(){ //if all blocks cleared
     	for (int r=0;r<rows;r++){
     		for (int c=0;c<cols;c++){
     			if (map[r][c] == null){

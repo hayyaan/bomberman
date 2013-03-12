@@ -13,7 +13,7 @@ import java.awt.Image;
 //import bomborman.Types.*;
 
 
-
+// not used
 
 
 public class PowerUp extends MapBasicBlock{
