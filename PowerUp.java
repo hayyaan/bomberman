@@ -14,7 +14,7 @@ import java.awt.Image;
 
 
 // not used
-
+/*
 
 public class PowerUp extends MapBasicBlock{
     
@@ -28,3 +28,4 @@ public class PowerUp extends MapBasicBlock{
     }
     
 }
+*/

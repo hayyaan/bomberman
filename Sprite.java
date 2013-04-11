@@ -136,7 +136,7 @@ public class Sprite { //handles sprites and all animations
 			
 //			Thread.sleep(100);
 			
-			RandomTest.m.p1.setImage(sprites[22]);
+			RandomTest.m.p1.setImage(sprites[24]);
 			RandomTest.m.repaint();
 			
 //			Thread.sleep(100);

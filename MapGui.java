@@ -215,7 +215,7 @@ public class MapGui extends JPanel implements KeyListener,ActionListener{
 		g2d.drawImage(bg,0,0,bg.getWidth(null),bg.getHeight(null),null);
 		
 		
-		for (int r=0;r<map.getRows();r++){ //draw where needed
+		for (int r=0;r<map.getRows();r++){
 			for (int c=0;c<map.getCols();c++){
 				if (map.map[r][c]==null){
 					continue;
@@ -226,9 +226,6 @@ public class MapGui extends JPanel implements KeyListener,ActionListener{
 			}
 		}
 		
-//		if (bomb !=null){
-//			g2d.drawImage(bomb.getImage(),bomb.getPosition().getRow()-25,bomb.getPosition().getColumn()-25,bomb.getImage().getWidth(null),bomb.getImage().getHeight(null),null);
-//			}
 		
 		g2d.drawImage(p1.getImage(),p1.getPosition().getRow()-25,p1.getPosition().getColumn()-25,p1.getImage().getWidth(null),p1.getImage().getHeight(null),null);
 		
@@ -239,7 +236,7 @@ public class MapGui extends JPanel implements KeyListener,ActionListener{
 		}
 		if (e2 !=null){
 			g2d.drawImage(e2.getImage(),e2.getPosition().getRow()-25,e2.getPosition().getColumn()-25,e2.getImage().getWidth(null),e1.getImage().getHeight(null),null);
-		}
+			}
 	}
 	
 	
